@@ -5,11 +5,11 @@ import { GetStarted, Login, Register, Splash } from '../pages';
 const Stack = createNativeStackNavigator();
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName='Login'>
+    <Stack.Navigator initialRouteName='Register'>
       <Stack.Screen 
       name='Splash' 
       component={Splash}
-      options={{headerShown: false}}/>
+      options={{headerShown: false}}/> 
       <Stack.Screen 
       name='GetStarted' 
       component={GetStarted}
