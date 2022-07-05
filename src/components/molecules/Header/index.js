@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { IconBackDark } from '../../../assets';
 import { Gap } from '../../atoms';
+import { colors } from '../../../utils';
 
 const Header = () => {
   return (
@@ -18,7 +19,7 @@ export default Header;
 const styles = StyleSheet.create({
     container:{
         flexDirection:'row',
-        backgroundColor:'white',
+        backgroundColor: colors.white,
         paddingHorizontal:16,
         paddingVertical:30
     },
@@ -26,7 +27,8 @@ const styles = StyleSheet.create({
         fontFamily:'Nunito-SemiBold',
         fontSize:20,
         textAlign:'center',
-        flex:1
+        flex:1,
+        color: colors.text.primary
 
     }
 })
