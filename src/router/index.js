@@ -1,11 +1,11 @@
 import { Text, View } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { GetStarted, Login, Register, Splash } from '../pages';
+import { GetStarted, Login, Register, Splash, UploadPhoto } from '../pages';
 const Stack = createNativeStackNavigator();
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName='Register'>
+    <Stack.Navigator initialRouteName='UploadPhoto'>
       <Stack.Screen 
       name='Splash' 
       component={Splash}
@@ -21,6 +21,10 @@ const Router = () => {
       <Stack.Screen 
       name='Login' 
       component={Login}
+      options={{headerShown: false}} />
+      <Stack.Screen 
+      name='UploadPhoto' 
+      component={UploadPhoto}
       options={{headerShown: false}} />
     </Stack.Navigator>
   )

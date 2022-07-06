@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import {ILLogo} from '../../assets';
+import { fonts } from '../../utils';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     title:{
         marginTop:20,
         fontSize:20,
-        fontFamily:'Nunito-SemiBold',
+        fontFamily:fonts.primary[600],
         color:'#112340',
     }
 })

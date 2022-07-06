@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import Gap from '../Gap';
-import { colors } from '../../../utils';
+import { colors, fonts } from '../../../utils';
 
 const Input = ({title}) => {
   return (
@@ -16,7 +16,7 @@ export default Input;
 
 const styles = StyleSheet.create({
   title:{
-    fontFamily:'Nunito-Regular',
+    fontFamily:fonts.primary[400],
     fontSize:16,
     color: colors.text.secondary
   },

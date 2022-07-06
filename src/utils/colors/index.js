@@ -2,7 +2,8 @@ const mainColors = {
     green1: '#0BCAD4',
     dark1: '#112340',
     grey1: '#7D8797',
-    grey2:'#E9E9E9'
+    grey2:'#E9E9E9',
+    grey3:'#EDEEF0',
 };
 
 export const colors = {
@@ -17,7 +18,7 @@ export const colors = {
     button:{
         primary:{
             background: mainColors.green1,
-            text: 'white',
+            text: mainColors.grey3,
         },
         secondary:{
             background: 'white',

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { colors } from '../../../utils';
+import { colors, fonts } from '../../../utils';
 
 const Link = ({size,align,title}) => {
   return (
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   label: (size,align) => (
     {
       fontSize:size,
-      fontFamily:'Nunito-Regular', 
+      fontFamily:fonts.primary[400], 
       color:colors.text.secondary,
       textDecorationLine:'underline',
       textAlign:align
