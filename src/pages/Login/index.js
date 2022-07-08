@@ -4,7 +4,7 @@ import {ILLogo} from '../../assets';
 import {Button, Gap, Input, Link} from '../../components';
 import { fonts } from '../../utils';
 
-const Login = () => {
+const Login = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ILLogo/>
@@ -17,7 +17,7 @@ const Login = () => {
       <Gap height={10}/>
       <Link title='Forgot My Password' size={12}/>
       <Gap height={40}/>
-      <Button title='Sign In'/>
+      <Button title='Sign In' onPress={() => navigation.replace()}/>
       <Gap height={30}/>
       <Link title='Create New Password' size={16} align='center'/>
     </View>
