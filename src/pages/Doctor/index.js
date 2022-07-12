@@ -1,6 +1,6 @@
 import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import {DoctorCategory, Gap, HomeProfile, RatedDoctor} from '../../components'
+import {DoctorCategory, Gap, HomeProfile, NewsItem, RatedDoctor} from '../../components'
 import { colors, fonts } from '../../utils'
 
 const Doctor = () => {
@@ -10,29 +10,35 @@ const Doctor = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
         <Gap height={16}/>
       <StatusBar backgroundColor={colors.secondary} barStyle='light-content'/>
-      <HomeProfile/>
-      <Gap height={30} />
-      <Text style={styles.title}>Mau Konsultasi Dengan Siapa Hari ini?</Text>
-      <Gap height={16}/>
+      <View style={styles.wrapperSection}>
+        <HomeProfile/>
+        <Gap height={30} />
+        <Text style={styles.title}>Mau Konsultasi Dengan Siapa Hari ini?</Text>
+        <Gap height={16}/>
+      </View>
       <View style={styles.scrolview}>
         <ScrollView style={styles.wrapper} horizontal showsHorizontalScrollIndicator={false}>
-          <Gap width={16}/>
+          <Gap width={32}/>
             <DoctorCategory/>
             <DoctorCategory/>
             <DoctorCategory/>
             <DoctorCategory/>
-          <Gap width={6} />
+          <Gap width={12} />
       </ScrollView>
       </View>
       <Gap height={30} />
       <Text style={styles.label}>Top Rated Doctors</Text>
       <Gap height={16} />
-      <View>
+      <View style={styles.wrapperSection}>
         <RatedDoctor/>
         <RatedDoctor/>
         <RatedDoctor/>
       </View>
       <Text style={styles.label}>Good News</Text>
+        <NewsItem/>
+        <NewsItem/>
+        <NewsItem/>
+      
       </ScrollView>
       </View>
     </View>
@@ -48,7 +54,6 @@ const styles = StyleSheet.create({
   },
   container:{
     backgroundColor:colors.white,
-    paddingHorizontal:16,
     flex:1,
     borderBottomLeftRadius:20,
     borderBottomRightRadius:20
@@ -68,6 +73,10 @@ const styles = StyleSheet.create({
   label:{
     fontFamily:fonts.primary[600],
     fontSize:16,
-    color:colors.text.primary
+    color:colors.text.primary,
+    paddingHorizontal:16
+  },
+  wrapperSection:{
+    paddingHorizontal:16
   }
 })
