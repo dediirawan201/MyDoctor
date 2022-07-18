@@ -2,8 +2,8 @@ import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import {DoctorCategory, Gap, HomeProfile, NewsItem, RatedDoctor} from '../../components'
 import { colors, fonts } from '../../utils'
-
-const Doctor = () => {
+import {CategoryDokter} from '../../assets';
+const Doctor = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.container}>
@@ -19,10 +19,11 @@ const Doctor = () => {
       <View style={styles.scrolview}>
         <ScrollView style={styles.wrapper} horizontal showsHorizontalScrollIndicator={false}>
           <Gap width={32}/>
-            <DoctorCategory/>
-            <DoctorCategory/>
-            <DoctorCategory/>
-            <DoctorCategory/>
+          {CategoryDokter.data.map(item => {
+            return (
+              <DoctorCategory onPress={() => navigation.navigate('ChooseDoctor')} key={item.id} category={item.category} />
+            )
+          })}
           <Gap width={12} />
       </ScrollView>
       </View>

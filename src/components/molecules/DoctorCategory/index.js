@@ -1,19 +1,31 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { ILCatUmum } from '../../../assets'
+import { ILCatObat, ILCatPsikiater, ILCatUmum } from '../../../assets'
 import { colors, fonts } from '../../../utils'
 import { Gap } from '../../atoms'
 
-const DoctorCategory = () => {
+const DoctorCategory = ({category,onPress}) => {
+  const Icon = () => {
+    if(category === 'Dokter umum'){
+      return <ILCatUmum style={styles.gambar}/>
+    }
+    if(category === 'Dokter psikiater'){
+    return <ILCatPsikiater style={styles.gambar}/>
+    }
+    if(category === 'Dokter anak'){
+      return <ILCatObat style={styles.gambar}/>
+    }
+    return <ILCatUmum style={styles.gambar}/>
+  }
   return (
-    <View style={styles.container}>
-      <ILCatUmum style={styles.gambar}/>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Icon/>
       <Gap height={28}/>
       <View style={styles.wrapperText}>
         <Text style={styles.text1}>Saya Butuh</Text>
-        <Text style={styles.text}>Dokter Umum</Text>
+        <Text style={styles.text}>{category}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

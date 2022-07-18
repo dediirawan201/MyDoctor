@@ -1,7 +1,7 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import {Gap, ListHospitals} from '../../components';
-import { ILHospitalBG } from '../../assets';
+import { DummyHospital1, DummyHospital2, DummyHospital3, ILHospitalBG } from '../../assets';
 import { colors, fonts } from '../../utils';
 
 const Hospitals = () => {
@@ -12,9 +12,21 @@ const Hospitals = () => {
         <Text style={styles.slot}>3 Tersedia</Text>
       </ImageBackground>
       <View style={styles.content}>
-        <ListHospitals/>
-        <ListHospitals/>
-        <ListHospitals/>
+        <ListHospitals 
+          nama='Rumahsakit' 
+          hospital='Anna Pekayon' 
+          address='Jl. raya pekayon' 
+          pic={DummyHospital1}/>
+        <ListHospitals 
+          nama='Rumahsakit Anak' 
+          hospital='Medika Galaxi' 
+          address='Jl. raya Galaxi' 
+          pic={DummyHospital2}/>
+        <ListHospitals 
+          nama='Rumahsakit Jiwa' 
+          hospital='Primaya Bekasi Barat'
+          address='Jl. raya pekayon' 
+          pic={DummyHospital3}/>
       </View>
     </View>
   )

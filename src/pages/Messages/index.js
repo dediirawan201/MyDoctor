@@ -1,13 +1,44 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import {Gap, ListDoctor} from '../../components'
 import { colors, fonts } from '../../utils'
+import { DummyDoctor4, DummyDoctor5, DummyDoctor6 } from '../../assets'
 
 const Messages = () => {
+  const [doctors] = useState([
+    {
+      id:1,
+      profile: DummyDoctor4,
+      name:'Shaza rumaisa',
+      desc:'Ada yang bisa dibantu mam'
+    },
+    {
+      id:2,
+      profile: DummyDoctor5,
+      name:'Kayla',
+      desc:'Tinggal ditembus obatnya saja ya'
+    },
+    {
+      id:3,
+      profile: DummyDoctor6,
+      name:'Kavin',
+      desc:'Keluhan nya apa ya pak?'
+    },
+  ])
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>Messages</Text>
+        {doctors.map(doctor => {
+          return (
+             <ListDoctor 
+             profile={doctor.profile} 
+             name={doctor.name}
+             desc={doctor.desc}
+             key={doctor.id}/>
+          )
+        
+        })}
         <ListDoctor/>
         <ListDoctor/>
         <ListDoctor/>
