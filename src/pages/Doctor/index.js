@@ -11,7 +11,7 @@ const Doctor = ({navigation}) => {
         <Gap height={16}/>
       <StatusBar backgroundColor={colors.secondary} barStyle='light-content'/>
       <View style={styles.wrapperSection}>
-        <HomeProfile/>
+        <HomeProfile onPress={() => navigation.navigate('Profile')}/>
         <Gap height={30} />
         <Text style={styles.title}>Mau Konsultasi Dengan Siapa Hari ini?</Text>
         <Gap height={16}/>

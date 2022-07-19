@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import {Gap, ListDoctor} from '../../components'
+import {List} from '../../components'
 import { colors, fonts } from '../../utils'
 import { DummyDoctor4, DummyDoctor5, DummyDoctor6 } from '../../assets'
 
@@ -31,7 +31,7 @@ const Messages = () => {
         <Text style={styles.title}>Messages</Text>
         {doctors.map(doctor => {
           return (
-             <ListDoctor 
+             <List
              profile={doctor.profile} 
              name={doctor.name}
              desc={doctor.desc}
@@ -39,9 +39,9 @@ const Messages = () => {
           )
         
         })}
-        <ListDoctor/>
-        <ListDoctor/>
-        <ListDoctor/>
+        <List/>
+        <List/>
+        <List/>
       </View>
     </View>
   )

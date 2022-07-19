@@ -3,11 +3,15 @@ import React from 'react'
 import { IconBackDark } from '../../../assets';
 import { Button, Gap } from '../../atoms';
 import { colors, fonts } from '../../../utils';
+import DarkProfile from './DarkProfile';
 
 const Header = ({onPress,title,type}) => {
+  if(type === 'dark-profile'){
+    return <DarkProfile/>
+  }
   return (
     <View style={styles.container(type)}>
-        <Button type='icon-only' icon={type === 'dark' ? 'back-dark' : 'back-light'} onPress={onPress}/>
+        <Button type='icon-only' icon={type === 'dark' ? 'back-light' : 'back-dark'} onPress={onPress}/>
         {/* <IconBackDark/> */}
       <Text style={styles.label(type)}>{title}</Text>
       <Gap width={24} />
@@ -21,11 +25,11 @@ const styles = StyleSheet.create({
     container:(type) => (
       {
         flexDirection:'row',
-        backgroundColor: type === 'dark' ? colors.white : colors.secondary,
+        backgroundColor: type === 'dark' ? colors.secondary : colors.white,
         paddingHorizontal:16,
         paddingVertical:30,
-        borderBottomLeftRadius:type === 'dark' ? 0 : 20,
-        borderBottomRightRadius:type === 'dark' ? 0 : 20,
+        borderBottomLeftRadius:type === 'dark' ? 20 : 0,
+        borderBottomRightRadius:type === 'dark' ? 20 : 0,
     }),
     label:(type) => (
       {
@@ -33,6 +37,6 @@ const styles = StyleSheet.create({
         fontSize:20,
         textAlign:'center',
         flex:1,
-        color: type === 'dark' ? colors.text.primary : colors.white
+        color: type === 'dark' ? colors.white : colors.text.primary
     })
 })

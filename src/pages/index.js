@@ -7,10 +7,13 @@ import Doctor from "./Doctor";
 import Hospitals from "./Hospitals";
 import Messages from "./Messages";
 import ChooseDoctor from "./ChooseDoctor";
+import Chat from "./Chat";
+import Profile from "./Profile";
 
 export {
     Splash,
     GetStarted,
     Login,Register,
     UploadPhoto,Doctor,Messages,
-    Hospitals,ChooseDoctor}
+    Hospitals,ChooseDoctor,
+    Chat, Profile}
