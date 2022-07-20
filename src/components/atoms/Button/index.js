@@ -22,12 +22,12 @@ export default Button;
 
 const styles = StyleSheet.create({
   container: (type) => ({
-    paddingVertical:10,
+    paddingVertical:16,
     backgroundColor: type === 'secondary' ? colors.button.primary.text : colors.button.primary.background,
     borderRadius:10
   }),
   text: (type) => ({
-    fontSize:16,
+    fontSize:18,
     textAlign:'center',
     fontFamily:fonts.primary[600],
     color: type === 'secondary' ? colors.text.primary : colors.white,

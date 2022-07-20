@@ -4,12 +4,12 @@ import { Button, Gap, Header, Link } from '../../components';
 import { IconAddPhoto, ILNullPhoto } from '../../assets';
 import { colors, fonts } from '../../utils';
 
-const UploadPhoto = () => {
+const UploadPhoto = ({navigation}) => {
   return (
     <View style={styles.page}>
-        <Header title='Upload Photo'/>
+        <Header title='Upload Photo' onPress={() => navigation.goBack()}/>
         <View style={styles.content}>
-            
+             
                 <View style={styles.profile}>
                     <View style={styles.wrapperAvatar}>
                         <Image source={ILNullPhoto} style={styles.avatar}/>
@@ -20,9 +20,9 @@ const UploadPhoto = () => {
                 </View>
             
             <View>
-                <Button title='Upload and Continue' type='secondary'/>
+                <Button onPress={() => navigation.navigate('MainApp')} title='Upload and Continue' type='secondary'/>
                 <Gap height={30} />
-                <Link title='Skip for This' size={16} align='center'/>
+                <Link onPress={() => navigation.navigate('MainApp')} title='Skip for This' size={16} align='center'/>
             </View>
     </View>
         </View>

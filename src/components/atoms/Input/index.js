@@ -1,13 +1,20 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Gap from '../Gap';
 import { colors, fonts } from '../../../utils';
 
 const Input = ({title}) => {
+  const [border,setBorder] = useState(colors.border)
+  const OnFormFocus = () => {
+    setBorder(colors.blue1)
+  }
+  const OnBlurForm = ({border}) => {
+    setBorder(border)
+  }
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
-      <TextInput style={styles.input}/>
+      <TextInput onFocus={OnFormFocus} onBlur={OnBlurForm} style={styles.input(border)}/>
     </View>
   )
 }
@@ -20,12 +27,14 @@ const styles = StyleSheet.create({
     fontSize:16,
     color: colors.text.secondary
   },
-  input:{
-    borderColor:colors.border,
-    padding:11,
-    borderWidth:1,
-    borderRadius:10,
-    marginTop:6
-
-  }
+  input:(border) => (
+    {
+      borderColor:border,
+      padding:11,
+      borderWidth:1,
+      borderRadius:10,
+      marginTop:6
+  
+    }
+  )
 })

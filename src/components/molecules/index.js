@@ -8,7 +8,9 @@ import List from "./List";
 import ListHospitals from "./ListHospitals";
 import ChatTime from "./ChatTime";
 import ChatInput from "./ChatInput";
+import ProfileUser from "./ProfileUser";
+import ProfileItem from "./ProfileItem";
 
 export {Header,BottomNavigator,DoctorCategory,HomeProfile,
     NewsItem, RatedDoctor, List, ListHospitals,
-    ChatInput, ChatTime}
+    ChatInput, ChatTime, ProfileUser, ProfileItem}
