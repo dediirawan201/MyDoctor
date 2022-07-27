@@ -1,26 +1,74 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import { Button, Gap, Header, Link } from '../../components';
-import { IconAddPhoto, ILNullPhoto } from '../../assets';
-import { colors, fonts } from '../../utils';
+import { IconAddPhoto, IconRemovePhoto, ILNullPhoto } from '../../assets';
+import { colors, fonts, storeData } from '../../utils';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { showMessage, hideMessage } from "react-native-flash-message";
+import { getDatabase, ref, set, update } from "firebase/database";
+import {Firebase} from '../../config'
 
-const UploadPhoto = ({navigation}) => {
+const UploadPhoto = ({navigation,route}) => {
+    const {fullName,profesion,uid} = route.params
+    const [hasPhoto,setHasPhoto] = useState(false)
+    const [photoForDB, setPhotoForDB] = useState('')
+    const [photo, setPhoto] = useState(ILNullPhoto)
+
+    
+    const addImage = () => {
+        const option = {
+            mediaType: 'photo',
+            quality: 0.5,
+            maxWidth:200,
+            maxHeight:200
+        }
+        launchImageLibrary(option, (res) => {
+            if(res.didCancel || res.errorMessage || res.errorCode){
+                showMessage({
+                    message: 'Upps, Anda Belum Masukan Foto',
+                    type: "default",
+                    backgroundColor: colors.err.primary,
+                    color:colors.white
+                  });
+            }else{
+                console.log('response get image ', res)
+                const foto = res.assets[0]
+                setPhotoForDB(foto.uri);
+                
+                const uri = {uri: foto.uri}
+                setPhoto(uri)
+                setHasPhoto(true)
+            }
+        })
+    }
+    const uploadAndContinue = () => {
+
+        const database = getDatabase(Firebase)
+                    update(ref(database, 'users/' + uid),{
+                        photo: photoForDB})
+        const data = route.params;
+        data.photo = photoForDB;
+        storeData('user', data)
+                        navigation.replace('MainApp')
+                    }
   return (
     <View style={styles.page}>
         <Header title='Upload Photo' onPress={() => navigation.goBack()}/>
         <View style={styles.content}>
              
                 <View style={styles.profile}>
-                    <View style={styles.wrapperAvatar}>
-                        <Image source={ILNullPhoto} style={styles.avatar}/>
-                        <IconAddPhoto style={styles.addphoto}/>
-                    </View>
-                    <Text style={styles.nama}>Dedi Irawan</Text>
-                    <Text style={styles.karir}>React Native Developer</Text>
+                    <TouchableOpacity style={styles.wrapperAvatar} onPress={addImage}>
+                        <Image source={photo} style={styles.avatar}/>
+                        {hasPhoto && <IconRemovePhoto style={styles.addphoto}/>}
+                        {!hasPhoto && <IconAddPhoto style={styles.addphoto}/> }
+                    </TouchableOpacity>
+                    <Text style={styles.nama}>{fullName}</Text>
+                    <Text style={styles.karir}>{profesion}</Text>
                 </View>
             
             <View>
-                <Button onPress={() => navigation.navigate('MainApp')} title='Upload and Continue' type='secondary'/>
+                <Button onPress={uploadAndContinue} 
+                title='Upload and Continue' disable={!hasPhoto}/>
                 <Gap height={30} />
                 <Link onPress={() => navigation.navigate('MainApp')} title='Skip for This' size={16} align='center'/>
             </View>
@@ -61,6 +109,7 @@ const styles = StyleSheet.create({
     avatar:{
         width:110,
         height:110,
+        borderRadius:110 / 2
     },
     addphoto:{
         position:'absolute',
@@ -71,12 +120,14 @@ const styles = StyleSheet.create({
         fontFamily:fonts.primary[600],
         fontSize:24,
         color:colors.text.primary,
-        textAlign:'center'
+        textAlign:'center',
+        textTransform:'capitalize'
     },
     karir:{
         fontFamily:fonts.primary[400],
         fontSize:18,
         color:colors.text.secondary,
-        textAlign:'center'
+        textAlign:'center',
+        textTransform:'capitalize'
     }
 })

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Gap from '../Gap';
 import { colors, fonts } from '../../../utils';
 
-const Input = ({title}) => {
+const Input = ({title,value, onChangeText, secureTextEntry}) => {
   const [border,setBorder] = useState(colors.border)
   const OnFormFocus = () => {
     setBorder(colors.blue1)
@@ -14,7 +14,9 @@ const Input = ({title}) => {
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
-      <TextInput onFocus={OnFormFocus} onBlur={OnBlurForm} style={styles.input(border)}/>
+      <TextInput value={value} onChangeText={onChangeText}
+      secureTextEntry={secureTextEntry}
+       onFocus={OnFormFocus} onBlur={OnBlurForm} style={styles.input(border)}/>
     </View>
   )
 }

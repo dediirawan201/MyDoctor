@@ -10,7 +10,9 @@ import ChatTime from "./ChatTime";
 import ChatInput from "./ChatInput";
 import ProfileUser from "./ProfileUser";
 import ProfileItem from "./ProfileItem";
+import LoadingBackground from "./LoadingBackground";
 
 export {Header,BottomNavigator,DoctorCategory,HomeProfile,
     NewsItem, RatedDoctor, List, ListHospitals,
-    ChatInput, ChatTime, ProfileUser, ProfileItem}
+    ChatInput, ChatTime, ProfileUser, ProfileItem,
+    LoadingBackground}

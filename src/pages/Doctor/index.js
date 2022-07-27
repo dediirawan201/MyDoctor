@@ -1,9 +1,10 @@
 import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {DoctorCategory, Gap, HomeProfile, NewsItem, RatedDoctor} from '../../components'
-import { colors, fonts } from '../../utils'
+import { colors, fonts, getData } from '../../utils'
 import {CategoryDokter, DummyDoctor1, DummyDoctor5, DummyDoctor6} from '../../assets';
 const Doctor = ({navigation}) => {
+ 
   return (
     <View style={styles.page}>
       <View style={styles.container}>

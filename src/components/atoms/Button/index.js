@@ -11,6 +11,12 @@ const Button = ({title,type,onPress, icon, disable}) => {
   if (type === 'icon-button-send') { 
     return <IconButtonSend icon={icon} disable={disable} onPress={onPress}/>;
   }
+  if(disable){
+    return (
+      <View style={styles.disable}>
+        <Text style={styles.textDisable}>{title}</Text>
+      </View>
+    )}
   return (
     <TouchableOpacity style={styles.container(type)} onPress={onPress}>
       <Text style={styles.text(type)}>{title}</Text>
@@ -31,6 +37,17 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontFamily:fonts.primary[600],
     color: type === 'secondary' ? colors.text.primary : colors.white,
+  }),
+  disable:{
+   paddingVertical:16,
+   borderRadius:10, 
+   backgroundColor:colors.button.disable.background
+  },
 
-  })
+  textDisable:{
+    fontSize:18,
+    textAlign:'center',
+    fontFamily:fonts.primary[600],
+    color:colors.button.disable.text
+  }
 })

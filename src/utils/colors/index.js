@@ -8,8 +8,12 @@ const mainColors = {
     grey1: '#7D8797',
     grey2:'#EEEEEE',
     grey3:'#E9E9E9',
-    grey3:'#EDEEF0',
+    grey4:'#EDEEF0',
+    grey5:'#B1B7C2',
     blue1:'#0066CB',
+    black1: '#0000',
+    black2: 'rgba(0, 0, 0, 0.5)',
+    red1:'red'
 
     
 };
@@ -37,6 +41,10 @@ export const colors = {
             background: 'white',
             text: mainColors.dark1,
         },
+        disable:{
+            text:mainColors.grey5,
+            background:mainColors.grey4
+        }
     },
     border:{
         primary:mainColors.grey2,
@@ -44,5 +52,11 @@ export const colors = {
     },
     cartlight:{
         primary:mainColors.green2
+    },
+    loadingBackground: {
+        primary:mainColors.black2
+    },
+    err:{
+        primary:mainColors.red1
     }
 }
