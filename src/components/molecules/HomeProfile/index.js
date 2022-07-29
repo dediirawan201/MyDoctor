@@ -48,10 +48,12 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[600],
     color:colors.text.primary,
     fontSize:16,
+    textTransform:'capitalize'
   },
   profesi:{
     fontSize:12,
     fontFamily:fonts.primary[400],
-    color:colors.text.secondary
+    color:colors.text.secondary,
+    textTransform:'capitalize'
   }
 })
