@@ -7,12 +7,14 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {Firebase} from '../../config';
 import { showMessage } from 'react-native-flash-message';
 import { getDatabase, onValue, ref } from 'firebase/database';
+import { useDispatch } from 'react-redux';
 
 const Login = ({navigation}) => {
   const [form, setForm] = useForm({email:'', password:''})
-  const [isloading, setIsLoading] = useState(false)
+  const dispatch = useDispatch();
+
   const enteryLogin = () => {
-    setIsLoading(true)
+    dispatch({type:'SET_LOADING', value: true})
     // console.log('login ', form)
     const auth = getAuth(Firebase);
 signInWithEmailAndPassword(auth, form.email, form.password)
@@ -20,7 +22,7 @@ signInWithEmailAndPassword(auth, form.email, form.password)
     // Signed in
     // const user = res.user;
     console.log('success: ', res)
-    setIsLoading(false)
+    dispatch({type:'SET_LOADING', value: false})
     const db = getDatabase(Firebase);
   ref(db, '/users/' + res.user.uid), (resDB) => {
   // const username = (resDB.val() && resDB.val().username) || 'Anonymous';
@@ -37,7 +39,7 @@ signInWithEmailAndPassword(auth, form.email, form.password)
     navigation.navigate('MainApp');
   })
   .catch((error) => {
-    setIsLoading(false)
+    dispatch({type:'SET_LOADING', value: false})
     const errorMessage = error.message;
     showMessage({
       message: errorMessage,
@@ -49,7 +51,6 @@ signInWithEmailAndPassword(auth, form.email, form.password)
   });
   }
   return (
-    <>
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
       <ILLogo/>
@@ -71,8 +72,6 @@ signInWithEmailAndPassword(auth, form.email, form.password)
        title='Create New Account' size={16} align='center'/>
        </ScrollView>
     </View>
-    {isloading && <LoadingBackground/>}
-    </>
   )
 }
 
