@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { Button, Gap, Header, Link } from '../../components';
 import { IconAddPhoto, IconRemovePhoto, ILNullPhoto } from '../../assets';
-import { colors, fonts, storeData } from '../../utils';
+import { colors, errorMessages, fonts, storeData } from '../../utils';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { getDatabase, ref, set, update } from "firebase/database";
@@ -17,19 +17,14 @@ const UploadPhoto = ({navigation,route}) => {
     
     const addImage = () => {
         const option = {
-            mediaType: 'photo',
+            mediaType: 'photo', 
             quality: 0.5,
             maxWidth:200,
             maxHeight:200
         }
         launchImageLibrary(option, (res) => {
             if(res.didCancel || res.errorMessage || res.errorCode){
-                showMessage({
-                    message: 'Upps, Anda Belum Masukan Foto',
-                    type: "default",
-                    backgroundColor: colors.err.primary,
-                    color:colors.white
-                  });
+                errorMessages('error lagi aja')
             }else{
                 console.log('response get image ', res)
                 const foto = res.assets[0]

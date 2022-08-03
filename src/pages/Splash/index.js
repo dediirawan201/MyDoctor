@@ -7,19 +7,19 @@ import {Firebase} from '../../config';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
-    setTimeout(() => {
       const auth = getAuth(Firebase);
-    onAuthStateChanged(auth, user => {
-      if(user){
-        console.log('user: ', user)
-        navigation.replace('MainApp')
-      }else{
-        //logout
-        navigation.replace('GetStarted')
-      }
+      const unSubscribe = onAuthStateChanged(auth, user => {
+        setTimeout(() => {
+          if(user){
+            console.log('user: ', user)
+            navigation.replace('MainApp')
+          }else{
+            //logout
+            navigation.replace('GetStarted')
+          }
+      },3000)
     })
-    // navigation.replace('GetStarted')
-    },3000)
+      return () => unSubscribe();
   }, [navigation])
   return (
     <View style={styles.page}>

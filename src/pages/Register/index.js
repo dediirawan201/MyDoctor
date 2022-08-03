@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import {Button, Gap, Header, Input, LoadingBackground} from '../../components';
-import { colors, storeData, useForm } from '../../utils';
+import { colors, errorMessages, storeData, useForm } from '../../utils';
 import {Firebase} from '../../config'
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { showMessage, hideMessage } from "react-native-flash-message";
@@ -12,12 +12,12 @@ const Register = ({navigation}) => {
   // const [profesion, setProfesion] = useState('')
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')
-
+  
   const [loading, setLoading] = useState(false)
   const [form,setForm] = useForm({
     fullName:'',
     profesion:'',
-    email:'',
+    email:'', 
     password:''
   });
 
@@ -56,18 +56,9 @@ const Register = ({navigation}) => {
       })
     })
     .catch((error) => {
-      const errorMessage = error.message;
       setLoading(false);
-      showMessage({
-        message: errorMessage,
-        type: "default",
-        backgroundColor: colors.err.primary,
-        color:colors.white
-      });
-      console.log(errorMessage)
-      // ..
-    });
-  }
+      errorMessages(error.message)
+  })}
   return (
     <>
     <View style={styles.page}>

@@ -3,17 +3,17 @@ import React from 'react'
 import { DummyNews1 } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-const NewsItem = () => {
+const NewsItem = ({title,date,image}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
       <View>
-        <Text style={styles.title}>Is it safe to stay at home during coronavirus?</Text>
-        <Text style={styles.today}>Today</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.today}>{date}</Text>
       </View>
-      <Image source={DummyNews1} style={styles.pict}/>
+      <Image source={{uri: image}} style={styles.pict}/>
       </View>
-    </View>
+    </View> 
   )
 }
 

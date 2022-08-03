@@ -2,27 +2,28 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import {ILLogo} from '../../assets';
 import {Button, Gap, Input, Link, LoadingBackground} from '../../components';
-import { colors, fonts, storeData, useForm } from '../../utils';
+import { colors, errorMessages, fonts, storeData, useForm } from '../../utils';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {Firebase} from '../../config';
-import { showMessage } from 'react-native-flash-message';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import { useDispatch } from 'react-redux';
+import { update } from '../../redux/Reducer/reducerSlice';
 
 const Login = ({navigation}) => {
   const [form, setForm] = useForm({email:'', password:''})
   const dispatch = useDispatch();
 
   const enteryLogin = () => {
-    dispatch({type:'SET_LOADING', value: true})
-    // console.log('login ', form)
+    // dispatch({type:'SET_LOADING', value: true})
+      dispatch(update(true))
+    console.log('login ', dispatch(update(true)))
     const auth = getAuth(Firebase);
 signInWithEmailAndPassword(auth, form.email, form.password)
   .then((res) => {
-    // Signed in
-    // const user = res.user;
     console.log('success: ', res)
-    dispatch({type:'SET_LOADING', value: false})
+    // dispatch({type:'SET_LOADING', value: false})
+    // dispatch(update({type:'SET_LOADING', value: false}))
+    dispatch(update(false))
     const db = getDatabase(Firebase);
   ref(db, '/users/' + res.user.uid), (resDB) => {
   // const username = (resDB.val() && resDB.val().username) || 'Anonymous';
@@ -39,14 +40,11 @@ signInWithEmailAndPassword(auth, form.email, form.password)
     navigation.navigate('MainApp');
   })
   .catch((error) => {
-    dispatch({type:'SET_LOADING', value: false})
+    // dispatch({type:'SET_LOADING', value: false})
+    // dispatch(update({type:'SET_LOADING', value: false}))
+    dispatch(update(false))
     const errorMessage = error.message;
-    showMessage({
-      message: errorMessage,
-      type: "default",
-      backgroundColor: colors.err.primary,
-      color:colors.white
-    });
+    errorMessages(error.message)
     console.log('err: ', errorMessage)
   });
   }

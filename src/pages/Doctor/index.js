@@ -1,10 +1,40 @@
 import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {DoctorCategory, Gap, HomeProfile, NewsItem, RatedDoctor} from '../../components'
-import { colors, fonts, getData } from '../../utils'
+import { colors, errorMessages, fonts, getData } from '../../utils'
 import {CategoryDokter, DummyDoctor1, DummyDoctor5, DummyDoctor6} from '../../assets';
+import { getDatabase, onValue, ref } from 'firebase/database';
+import {Firebase} from '../../config';
+
 const Doctor = ({navigation}) => {
- 
+  const [news, setNews] = useState([]) 
+  const [categoryDoctor, setCategoryDoctor] = useState([])
+  useEffect(() => {
+    const db = getDatabase(Firebase);
+    onValue(ref(db, '/news/'),(res) =>{
+      console.log('respon news ',res.val())
+      if(res.val()){
+        setNews(res.val())
+      }else{
+        errorMessages(errorMessages)
+      }
+      
+    }, {
+      onlyOnce: true
+    })
+
+    onValue(ref(db, '/category_doctor/'),(res) =>{
+      console.log('respon categoryDoctor ',res.val())
+      if(res.val()){
+        setCategoryDoctor(res.val()) 
+      }else{
+        errorMessages(errorMessages)
+      }
+      
+    }, {
+      onlyOnce: true
+    })
+  },[])
   return (
     <View style={styles.page}>
       <View style={styles.container}>
@@ -14,13 +44,13 @@ const Doctor = ({navigation}) => {
       <View style={styles.wrapperSection}>
         <HomeProfile onPress={() => navigation.navigate('Profile')}/>
         <Gap height={30} />
-        <Text style={styles.title}>Mau Konsultasi Dengan Siapa Hari ini?</Text>
+        <Text style={styles.title}>Mau Konsultasi Dengan Siapa Hari ini? Dedi ya</Text>
         <Gap height={16}/>
       </View>
       <View style={styles.scrolview}>
         <ScrollView style={styles.wrapper} horizontal showsHorizontalScrollIndicator={false}>
           <Gap width={32}/>
-          {CategoryDokter.data.map(item => {
+          {categoryDoctor.map(item => {
             return (
               <DoctorCategory onPress={() => navigation.navigate('ChooseDoctor')} key={item.id} category={item.category} />
             )
@@ -37,9 +67,12 @@ const Doctor = ({navigation}) => {
         <RatedDoctor avatar={DummyDoctor6} name='Heikal Ramadhan' desc='Dokter Spesialis' onPress={() => navigation.navigate('ProfileDokter')}/>
       </View>
       <Text style={styles.label}>Good News</Text>
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
+          {news.map(item => { 
+            return(
+              <NewsItem title={item.title} date={item.date} image={item.image}/>
+            ) 
+          })}
+        
       
       </ScrollView>
       </View>
