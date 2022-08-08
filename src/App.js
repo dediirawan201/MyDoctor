@@ -5,11 +5,11 @@ import FlashMessage from "react-native-flash-message";
 import { LoadingBackground } from './components';
 import {store} from './redux/store';
 import { Provider, useSelector } from 'react-redux';
+import { LogBox,} from 'react-native';
 
 const MainApp = () => {
-  // const {loading} = useSelector((state) => state.produk) 
   const stateGlobal = useSelector(state => state); 
-  // console.log('stateGlobal ', stateGlobal.produk.loading) 
+  LogBox.ignoreLogs(['AsyncStorage has been '])
   return (
     <>
     <NavigationContainer>

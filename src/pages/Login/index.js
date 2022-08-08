@@ -14,20 +14,16 @@ const Login = ({navigation}) => {
   const dispatch = useDispatch();
 
   const enteryLogin = () => {
-    // dispatch({type:'SET_LOADING', value: true})
       dispatch(update(true))
     console.log('login ', dispatch(update(true)))
     const auth = getAuth(Firebase);
 signInWithEmailAndPassword(auth, form.email, form.password)
   .then((res) => {
     console.log('success: ', res)
-    // dispatch({type:'SET_LOADING', value: false})
-    // dispatch(update({type:'SET_LOADING', value: false}))
+
     dispatch(update(false))
     const db = getDatabase(Firebase);
   ref(db, '/users/' + res.user.uid), (resDB) => {
-  // const username = (resDB.val() && resDB.val().username) || 'Anonymous';
-  // ...
   console.log('data user: ', resDB.val())
   if(resDB.val()){
     storeData('user', resDB.val())

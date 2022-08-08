@@ -6,6 +6,7 @@ import {Firebase} from '../../config'
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { getDatabase, ref, set } from "firebase/database";
+import { useDispatch } from 'react-redux';
 
 const Register = ({navigation}) => {
   // const [fullName, setFullName] = useState('')
@@ -20,14 +21,15 @@ const Register = ({navigation}) => {
     email:'', 
     password:''
   });
+  const dispatch = useDispatch();
 
   const OnNavigation = () => {
-    setLoading(true)
+    dispatch(update(true))
     const authentication = getAuth(Firebase)
     createUserWithEmailAndPassword(authentication,form.email, form.password)
     .then((success) => {
       // Signed in
-      setLoading(false)
+      dispatch(update(false))
       setForm('reset')
 
       // const data = {
@@ -60,7 +62,6 @@ const Register = ({navigation}) => {
       errorMessages(error.message)
   })}
   return (
-    <>
     <View style={styles.page}>
       <Header onPress={() => navigation.goBack() } title='Daftar Akun'/>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -89,9 +90,6 @@ const Register = ({navigation}) => {
       </View>
         </ScrollView>     
     </View>
-    {loading && <LoadingBackground/> }
-    
-    </>
   )
 }
 
