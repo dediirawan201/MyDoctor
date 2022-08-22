@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { getDatabase, ref, set } from "firebase/database";
 import { useDispatch } from 'react-redux';
+import { update } from '../../redux/Reducer/reducerSlice';
 
 const Register = ({navigation}) => {
   // const [fullName, setFullName] = useState('')

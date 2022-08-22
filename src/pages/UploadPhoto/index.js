@@ -22,7 +22,7 @@ const UploadPhoto = ({navigation,route}) => {
             maxWidth:200,
             maxHeight:200
         }
-        launchImageLibrary(option, (res) => {
+        launchCamera(option, (res) => {
             if(res.didCancel || res.errorMessage || res.errorCode){
                 errorMessages('error lagi aja')
             }else{
